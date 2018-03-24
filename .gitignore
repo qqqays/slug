@@ -26,6 +26,7 @@ nbdist/
 
 ### custom ###
 target
+out
 logs
 artifacts
 
