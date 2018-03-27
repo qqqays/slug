@@ -33,3 +33,5 @@ artifacts
 *.log
 jdbc.properties
 *.jar
+
+application.yml

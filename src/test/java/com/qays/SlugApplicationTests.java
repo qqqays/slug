@@ -25,7 +25,7 @@ public class SlugApplicationTests {
 	public void httpclientTest(){
 		CloseableHttpClient httpClient = HttpClients.createDefault();
 //		HttpGet httpGet = new HttpGet("http://www.baidu.com/s?ie=UTF-8&wd=太阳能电池");
-		HttpGet httpGet = new HttpGet("");
+		HttpGet httpGet = new HttpGet("http://www.swkj.net.cn");
 
 		try (CloseableHttpResponse response = httpClient.execute(httpGet)) {
 
