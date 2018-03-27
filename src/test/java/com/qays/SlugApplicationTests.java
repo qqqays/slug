@@ -9,6 +9,8 @@ import org.apache.http.util.EntityUtils;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -49,7 +51,9 @@ public class SlugApplicationTests {
 
 	@Test
 	public void jsoupTest(){
-		Connection con = Jsoup.connect("http://www.swpv.net");
+//		Connection con = Jsoup.connect("http://www.swpv.net");
+//		Connection con = Jsoup.connect("http://www.sctaiyi.com/index.html");
+		Connection con = Jsoup.connect("http://www.jhzm88.com/");
 
 		con.header(
 				"User-Agent",
@@ -63,7 +67,32 @@ public class SlugApplicationTests {
 			e.printStackTrace();
 		}
 
-		System.out.printf("finished");
+
+//		Elements links = doc.getElementsByTag("a");
+//
+//		int i = 0;
+//		for (Element link : links) {
+//			System.out.println(link.attr("href") + " 链接名：" + link.text() + " numbers: " + i++);
+//		}
+
+		Elements contents = doc.getElementsByTag("p");
+
+		Long number = 0L;
+		for (Element content : contents) {
+			number += content.toString().length();
+		}
+
+		System.out.println("number" + number);
+
+	}
+
+	@Test
+	public void strLengthTest(){
+		String a = "发电";
+		String b = "abc";
+
+		System.out.println(a.length());
+		System.out.println(b.length());
 	}
 
 }
