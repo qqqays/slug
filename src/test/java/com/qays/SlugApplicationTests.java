@@ -1,5 +1,6 @@
 package com.qays;
 
+import com.qays.util.GainLinks;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -17,6 +18,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -68,21 +72,21 @@ public class SlugApplicationTests {
 		}
 
 
-//		Elements links = doc.getElementsByTag("a");
-//
-//		int i = 0;
-//		for (Element link : links) {
-//			System.out.println(link.attr("href") + " 链接名：" + link.text() + " numbers: " + i++);
-//		}
+		Elements links = doc.getElementsByTag("a");
 
-		Elements contents = doc.getElementsByTag("p");
-
-		Long number = 0L;
-		for (Element content : contents) {
-			number += content.toString().length();
+		int i = 0;
+		for (Element link : links) {
+			System.out.println(link.attr("abs:href") + " 链接名：" + link.text() + " numbers: " + i++);
 		}
 
-		System.out.println("number" + number);
+//		Elements contents = doc.getElementsByTag("p");
+//
+//		Long number = 0L;
+//		for (Element content : contents) {
+//			number += content.toString().length();
+//		}
+//
+//		System.out.println("number" + number);
 
 	}
 
@@ -93,6 +97,31 @@ public class SlugApplicationTests {
 
 		System.out.println(a.length());
 		System.out.println(b.length());
+	}
+
+	@Test
+	public void setTest(){
+		Set<String> set = ConcurrentHashMap.newKeySet();
+
+		set.add("a");
+		System.out.println(set.add("b"));
+		System.out.println(set.add("b"));
+		set.add("c");
+	}
+
+	@Test
+	public void methodTest(){
+
+		GainLinks gainLinks = new GainLinks(ConcurrentHashMap.newKeySet(), new ConcurrentLinkedQueue<>());
+
+		Runnable run = () -> gainLinks.operate("http://www.swpv.net");
+
+		Thread thread = new Thread(run);
+
+		thread.start();
+
+		System.out.println("finish");
+
 	}
 
 }
