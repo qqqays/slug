@@ -6,6 +6,9 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.jsoup.Connection;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,7 +28,9 @@ public class SlugApplicationTests {
 	public void httpclientTest(){
 		CloseableHttpClient httpClient = HttpClients.createDefault();
 //		HttpGet httpGet = new HttpGet("http://www.baidu.com/s?ie=UTF-8&wd=太阳能电池");
-		HttpGet httpGet = new HttpGet("http://www.swkj.net.cn");
+		HttpGet httpGet = new HttpGet("http://www.swkj.net.cn/about-sw.html");
+//		HttpGet httpGet = new HttpGet("http://www.swkj.net.cn");
+//		HttpGet httpGet = new HttpGet("http://www.swpv.net");
 
 		try (CloseableHttpResponse response = httpClient.execute(httpGet)) {
 
@@ -40,6 +45,25 @@ public class SlugApplicationTests {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Test
+	public void jsoupTest(){
+		Connection con = Jsoup.connect("http://www.swpv.net");
+
+		con.header(
+				"User-Agent",
+				"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36"
+		);
+
+		Document doc = null;
+		try {
+			doc = con.get();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		System.out.printf("finished");
 	}
 
 }
