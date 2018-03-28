@@ -1,6 +1,7 @@
 package com.qays;
 
 import com.qays.util.GainLinks;
+import com.qays.util.MyThreadPool;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -132,6 +133,10 @@ public class SlugApplicationTests {
 
 
 		System.out.println(fixedThreadPool.isTerminated());
+
+		while (!fixedThreadPool.isTerminated()) {
+//			fixedThreadPool.execute(new MyThreadPool());
+		}
 
 	}
 

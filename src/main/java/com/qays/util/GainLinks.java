@@ -27,10 +27,16 @@ public class GainLinks {
         this.queue = queue;
     }
 
+    public Queue<String> getQueue() {
+        return queue;
+    }
+
+
+
     public void operate(String url) {
 
         try {
-            Connection con = Jsoup.connect(url).timeout(1000);
+            Connection con = Jsoup.connect(url);
 
             con.header(
                     "User-Agent",
@@ -59,8 +65,15 @@ public class GainLinks {
 
     }
 
-    public void operateAlpha(String url){
-
+    public void operateAlpha(){
+        String temp;
+        try {
+            if ((temp = queue.poll()) != null) {
+                operate(temp);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {
@@ -74,29 +87,42 @@ public class GainLinks {
 
 //        Runnable run = () -> gainLinks.operate("http://www.swpv.net");
 
-        Runnable run = () -> {
-            String temp;
+//        Runnable run = () -> {
+//            String temp;
+//
+//            try {
+//                while ((temp = queue.poll()) != null) {
+//                    gainLinks.operate(temp);
+//                }
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//
+//            int i = 1;
+//            for (String e:set){
+//                System.out.println(i++ + ". " + e);
+//            }
+//        };
+
+
+//        Thread thread = new Thread(run);
+//        thread.start();
+
+        ExecutorService fixedThreadPool = Executors.newFixedThreadPool(5);
+
+        while (queue.peek() != null) {
+            fixedThreadPool.execute(new MyThreadPool(gainLinks));
 
             try {
-                while ((temp = queue.poll()) != null) {
-                    gainLinks.operate(temp);
-                }
-            } catch (Exception e) {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+        }
 
-            int i = 1;
-            for (String e:set){
-                System.out.println(i++ + ". " + e);
-            }
-        };
-
-
-        Thread thread = new Thread(run);
-
-        thread.start();
-
-
-
+        int i = 1;
+        for (String e:set){
+            System.out.println(i++ + ". " + e);
+        }
     }
 }
