@@ -11,12 +11,16 @@ import java.util.Queue;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class GainLinks {
 
     private Set<String> set;
 
     private Queue<String> queue;
+
+
 
     public GainLinks(Set<String> set, Queue<String> queue) {
         this.set = set;
@@ -26,7 +30,7 @@ public class GainLinks {
     public void operate(String url) {
 
         try {
-            Connection con = Jsoup.connect(url);
+            Connection con = Jsoup.connect(url).timeout(1000);
 
             con.header(
                     "User-Agent",
@@ -48,10 +52,14 @@ public class GainLinks {
                 }
             }
 
-            System.out.println("finished one page ;)" + System.currentTimeMillis());
+            System.out.println("finished analysis one page ;)" + System.currentTimeMillis());
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+    }
+
+    public void operateAlpha(String url){
 
     }
 
@@ -60,11 +68,15 @@ public class GainLinks {
         Set<String> set = ConcurrentHashMap.newKeySet();
         Queue<String> queue = new ConcurrentLinkedQueue<>();
         GainLinks gainLinks = new GainLinks(set,queue);
-//        queue.add("http://www.swpv.net");
+        queue.add("http://www.swpv.net");
 //        queue.add("http://www.sctaiyi.com");
-        queue.add("http://www.jhzm88.com/");
+//        queue.add("http://www.jhzm88.com/");
 
 //        Runnable run = () -> gainLinks.operate("http://www.swpv.net");
+
+        ExecutorService fixedThreadPool = Executors.newFixedThreadPool(5);
+
+
         Runnable run = () -> {
             String temp;
 
