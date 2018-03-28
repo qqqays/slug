@@ -110,14 +110,32 @@ public class GainLinks {
 
         ExecutorService fixedThreadPool = Executors.newFixedThreadPool(5);
 
-        while (queue.peek() != null) {
-            fixedThreadPool.execute(new MyThreadPool(gainLinks));
+//        while (queue.peek() != null) {
+//            fixedThreadPool.execute(new MyThreadPool(gainLinks));
+//
+//            try {
+//                Thread.sleep(5000);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        }
 
-            try {
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+        int j = 0;
+        while (true) {
+            if (queue.peek() == null) {
+                try {
+                    Thread.sleep(3000);
+                    System.out.println("not has url in queue\n");
+                    if(j++ > 3)
+                        break;
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }else {
+                fixedThreadPool.execute(new MyThreadPool(gainLinks));
+                j = 0;
             }
+
         }
 
         int i = 1;
