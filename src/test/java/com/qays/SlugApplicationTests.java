@@ -21,6 +21,8 @@ import java.io.IOException;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -121,6 +123,15 @@ public class SlugApplicationTests {
 		thread.start();
 
 		System.out.println("finish");
+
+	}
+
+	@Test
+	public void threadPool(){
+		ExecutorService fixedThreadPool = Executors.newFixedThreadPool(5);
+
+
+		System.out.println(fixedThreadPool.isTerminated());
 
 	}
 

@@ -74,9 +74,6 @@ public class GainLinks {
 
 //        Runnable run = () -> gainLinks.operate("http://www.swpv.net");
 
-        ExecutorService fixedThreadPool = Executors.newFixedThreadPool(5);
-
-
         Runnable run = () -> {
             String temp;
 
