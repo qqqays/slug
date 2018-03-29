@@ -87,26 +87,26 @@ public class GainLinks {
 
 //        Runnable run = () -> gainLinks.operate("http://www.swpv.net");
 
-//        Runnable run = () -> {
-//            String temp;
-//
-//            try {
-//                while ((temp = queue.poll()) != null) {
-//                    gainLinks.operate(temp);
-//                }
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//
-//            int i = 1;
-//            for (String e:set){
-//                System.out.println(i++ + ". " + e);
-//            }
-//        };
+        Runnable run = () -> {
+            String temp;
+
+            try {
+                while ((temp = queue.poll()) != null) {
+                    gainLinks.operate(temp);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            int i = 1;
+            for (String e:set){
+                System.out.println(i++ + ". " + e);
+            }
+        };
 
 
-//        Thread thread = new Thread(run);
-//        thread.start();
+        Thread thread = new Thread(run);
+        thread.start();
 
         ExecutorService fixedThreadPool = Executors.newFixedThreadPool(5);
 
@@ -120,27 +120,27 @@ public class GainLinks {
 //            }
 //        }
 
-        int j = 0;
-        while (true) {
-            if (queue.peek() == null) {
-                try {
-                    Thread.sleep(3000);
-                    System.out.println("not has url in queue\n");
-                    if(j++ > 3)
-                        break;
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }else {
-                fixedThreadPool.execute(new MyThreadPool(gainLinks));
-                j = 0;
-            }
-
-        }
-
-        int i = 1;
-        for (String e:set){
-            System.out.println(i++ + ". " + e);
-        }
+//        int j = 0;
+//        while (true) {
+//            if (queue.peek() == null) {
+//                try {
+//                    Thread.sleep(3000);
+//                    System.out.println("not has url in queue\n");
+//                    if(j++ > 3)
+//                        break;
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//            }else {
+//                fixedThreadPool.execute(new MyThreadPool(gainLinks));
+//                j = 0;
+//            }
+//
+//        }
+//
+//        int i = 1;
+//        for (String e:set){
+//            System.out.println(i++ + ". " + e);
+//        }
     }
 }
