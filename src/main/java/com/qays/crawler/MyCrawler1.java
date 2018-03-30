@@ -48,7 +48,8 @@ public class MyCrawler1 extends WebCrawler {
     public boolean shouldVisit(Page referringPage, WebURL url) {
         String href = url.getURL().toLowerCase();
         return !FILTERS.matcher(href).matches()
-                && href.startsWith("http://www.jhzm88.com");
+//                && href.startsWith("http://www.jhzm88.com");
+                && href.startsWith("http://www.socreat.cn/article/");
 
     }
 
@@ -88,17 +89,21 @@ public class MyCrawler1 extends WebCrawler {
                 }
             }
 
-            Element element = doc.getElementById("cntrBody");
+//            Element element = doc.getElementById("cntrBody");
 
             Elements elements1 = doc.getElementsByClass("new_content");
 
             for (Element element1 : elements1) {
-                if (element != null) {
-                    pe.setHtmlContent(element.html());
-                    pe.setTextContent(element.text());
-
-                    pageEntitySet.add(pe);
+                StringBuilder sb = new StringBuilder();
+                StringBuilder sb1 = new StringBuilder();
+                if (element1 != null) {
+                    sb.append(element1.html());
+                    sb1.append(element1.text());
                 }
+                pe.setHtmlContent(sb.toString());
+                pe.setTextContent(sb1.toString());
+
+                pageEntitySet.add(pe);
             }
 
         }

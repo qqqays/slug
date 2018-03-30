@@ -61,7 +61,8 @@ public class Controller implements ApplicationContextAware{
          * which are found in these pages
          */
 
-        controller.addSeed("http://www.jhzm88.com");
+//        controller.addSeed("http://www.jhzm88.com");
+        controller.addSeed("http://www.socreat.cn/article/qyzx.html");
 
         /*
          * Start the crawl. This is a blocking operation, meaning that your code
