@@ -84,7 +84,6 @@ public class SlugApplicationTests {
 		}
 
 //		Elements contents = doc.getElementsByTag("p");
-//
 //		Long number = 0L;
 //		for (Element content : contents) {
 //			number += content.toString().length();
