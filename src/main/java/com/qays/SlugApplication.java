@@ -15,17 +15,15 @@ public class SlugApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SlugApplication.class, args);
 
-		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(MyConfiguration.class);
-
-		Controller controller = context.getBean(Controller.class);
-
-
-
-		try {
-			controller.exec();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+//		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(MyConfiguration.class);
+//
+//		Controller controller = context.getBean(Controller.class);
+//
+//		try {
+//			controller.exec();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 
 	}
 }
