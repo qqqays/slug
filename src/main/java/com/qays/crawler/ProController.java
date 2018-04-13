@@ -27,33 +27,46 @@ public class ProController {
 
     private final int numberOfCrawlers = 7;
 
-    public void refine(String[] urls, String option, String seed) {
-        /*
+    public List exec(Class<? extends MyCrawler> clazz, String[] urls, String option, String seed) {
+                /*
          * For each crawl, you need to add some seed urls. These are the first
          * URLs that are fetched and then the crawler starts following links
          * which are found in these pages
          */
-
-//        controller.addSeed("http://www.jhzm88.com");
-//        controller.addSeed("http://www.socreat.cn/article/qyzx.html");
         controller.addSeed(seed);
 
         /*
          * Start the crawl. This is a blocking operation, meaning that your code
          * will reach the line after this only when crawling is finished.
          */
-//        controller.start(MyCrawler1.class, numberOfCrawlers);
 
-        MyFactory myfactory = new MyFactory(Crawler4Refine.class, urls, option);
+        MyFactory myfactory = new MyFactory(clazz, urls, option);
 
 //        controller.startNonBlocking(myfactory, numberOfCrawlers);
         controller.start(myfactory, numberOfCrawlers);
 
-        List list = controller.getCrawlersLocalData();
+        return controller.getCrawlersLocalData();
+    }
+
+    public void refine(String[] urls, String option, String seed) {
+
+        List list = exec(Crawler4Refine.class, urls, option, seed);
 
         for (Object set : list) {
             for (Object page : (Set) set) {
                 pageRepository.save((PageEntity) page);
+            }
+        }
+    }
+
+    public void getLinks(String[] urls, String option, String seed) {
+
+        List list = exec(Crawler4Links.class, urls, option, seed);
+
+        int i = 0;
+        for (Object set : list) {
+            for (Object link : (Set) set) {
+                System.out.println("~counter: " + i++ + " link: " + link );
             }
         }
     }

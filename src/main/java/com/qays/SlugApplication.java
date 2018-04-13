@@ -11,8 +11,8 @@ import org.springframework.context.annotation.Import;
 @SpringBootApplication
 public class SlugApplication {
 
-	public static void main(String[] args) {
-		ApplicationContext ctx = SpringApplication.run(SlugApplication.class, args);
+    public static void main(String[] args) {
+        ApplicationContext ctx = SpringApplication.run(SlugApplication.class, args);
 
 //		String[] beanNames =  ctx.getBeanDefinitionNames();
 //		System.out.println("beanNames个数："+beanNames.length);
@@ -20,8 +20,12 @@ public class SlugApplication {
 //			System.out.println(bn);
 //		}
 
-		ProController proController = ctx.getBean(ProController.class);
+        ProController proController = ctx.getBean(ProController.class);
 
-		proController.refine(new String[]{"http://www.pv-ledzm.com/article","http://www.pv-ledzm.com/category"}, ".newscon", "http://www.pv-ledzm.com");
-	}
+//        proController.refine(new String[]{"http://www.pv-ledzm.com/article", "http://www.pv-ledzm.com/category"},
+//                ".newscon",
+//                "http://www.pv-ledzm.com");
+
+        proController.getLinks(new String[]{"http://www.swpv.net"}, "", "http://www.swpv.net");
+    }
 }
