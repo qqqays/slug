@@ -25,8 +25,8 @@ public class RepositoryTest {
     @Autowired
     PageRepository pageRepository;
 
-    @Autowired
-    Controller controller;
+//    @Autowired
+//    Controller controller;
 
     @Autowired
     ProController proController;
@@ -43,7 +43,7 @@ public class RepositoryTest {
     @Test
     public void insertTest(){
         try {
-            controller.exec();
+//            controller.exec();
         } catch (Exception e) {
             e.printStackTrace();
         }
