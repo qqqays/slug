@@ -1,6 +1,7 @@
 package com.qays;
 
 import com.qays.crawler.Controller;
+import com.qays.crawler.ProController;
 import com.qays.entity.PageEntity;
 import com.qays.repository.PageRepository;
 import org.junit.Test;
@@ -8,6 +9,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import javax.persistence.Table;
 
 /**
  * Created by Q-ays.
@@ -25,6 +28,9 @@ public class RepositoryTest {
     @Autowired
     Controller controller;
 
+    @Autowired
+    ProController proController;
+
     @Test
     public void repositorySave(){
         PageEntity pageEntity = new PageEntity();
@@ -41,6 +47,11 @@ public class RepositoryTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Test
+    public void refine(){
+        proController.refine("http://www.swpv.net/news",".detail-body", "http://www.swpv.net/news");
     }
 
 }

@@ -59,7 +59,7 @@ public class MyCrawler1 extends WebCrawler {
      */
     @Override
     public void visit(Page page) {
-        String url = page.getWebURL().getURL();
+/*        String url = page.getWebURL().getURL();
         System.out.println("URL: " + url);
 
         if (page.getParseData() instanceof HtmlParseData) {
@@ -106,7 +106,7 @@ public class MyCrawler1 extends WebCrawler {
                 pageEntitySet.add(pe);
             }
 
-        }
+        }*/
     }
 
     @Override
@@ -119,6 +119,7 @@ public class MyCrawler1 extends WebCrawler {
         if (statusCode != HttpStatus.SC_OK) {
             if (statusCode == HttpStatus.SC_NOT_FOUND) {
 //                urlSet.add(webUrl.getURL());
+                System.out.println("fuck");
             }
         }
     }
