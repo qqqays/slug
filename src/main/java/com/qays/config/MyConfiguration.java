@@ -8,8 +8,8 @@ import org.springframework.context.annotation.Configuration;
  * whosqays@gmail.com
  * 03-30-2018 11:08
  */
-@Configuration
-@ComponentScan("com.qays.crawler.*")
+//@Configuration
+//@ComponentScan("com.qays.crawler.*")
 public class MyConfiguration {
 
 }

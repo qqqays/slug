@@ -20,8 +20,8 @@ public class Crawler4Refine extends MyCrawler {
 
     protected Set<PageEntity> pageEntitySet;
 
-    public Crawler4Refine(String url, String option) {
-        super(url, option);
+    public Crawler4Refine(String[] urls, String option) {
+        super(urls, option);
         this.pageEntitySet = new HashSet<>();
     }
 

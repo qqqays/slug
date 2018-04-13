@@ -22,7 +22,7 @@ import java.util.Set;
  * 01-08-2018 8:40
  */
 
-@Component
+//@Component
 public class Controller implements ApplicationContextAware{
 
     private static ApplicationContext applicationContext = null;

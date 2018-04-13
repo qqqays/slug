@@ -14,20 +14,20 @@ import java.lang.reflect.Constructor;
 public class MyFactory<T extends MyCrawler> implements CrawlController.WebCrawlerFactory {
 
     private final Class<T> clazz;
-    private String url;
+    private String[] urls;
     private String option;
 
-    public MyFactory(Class<T> clazz, String url, String option){
+    public MyFactory(Class<T> clazz, String[] urls, String option){
         this.clazz = clazz;
-        this.url = url;
+        this.urls = urls;
         this.option = option;
     }
 
     @Override
     public WebCrawler newInstance() throws Exception {
 
-        Constructor con = clazz.getConstructor(String.class, String.class);
+        Constructor con = clazz.getConstructor(String[].class, String.class);
 
-        return (WebCrawler) con.newInstance(url,option);
+        return (WebCrawler) con.newInstance(urls,option);
     }
 }

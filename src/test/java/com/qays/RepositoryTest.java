@@ -51,7 +51,7 @@ public class RepositoryTest {
 
     @Test
     public void refine(){
-        proController.refine("http://www.swpv.net/news",".detail-body", "http://www.swpv.net/news");
+        proController.refine(new String[]{"http://www.swpv.net/news"},".detail-body", "http://www.swpv.net/news");
     }
 
 }

@@ -27,7 +27,7 @@ public class ProController {
 
     private final int numberOfCrawlers = 7;
 
-    public void refine(String url, String option, String seed) {
+    public void refine(String[] urls, String option, String seed) {
         /*
          * For each crawl, you need to add some seed urls. These are the first
          * URLs that are fetched and then the crawler starts following links
@@ -44,7 +44,7 @@ public class ProController {
          */
 //        controller.start(MyCrawler1.class, numberOfCrawlers);
 
-        MyFactory myfactory = new MyFactory(Crawler4Refine.class, url, option);
+        MyFactory myfactory = new MyFactory(Crawler4Refine.class, urls, option);
 
 //        controller.startNonBlocking(myfactory, numberOfCrawlers);
         controller.start(myfactory, numberOfCrawlers);

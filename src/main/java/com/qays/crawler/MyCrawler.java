@@ -23,16 +23,16 @@ import java.util.regex.Pattern;
 public class MyCrawler extends WebCrawler{
     protected final static Pattern FILTERS = Pattern.compile(".*(\\.(css|js|gif|jpg|png|mp3|mp4|zip|gz|pdf|jpeg|txt|exe))$");
 
-    protected String url;
+    protected String[] urls;
 
     protected String option;
 
-    public MyCrawler(String url) {
-        this.url = url;
+    public MyCrawler(String[] urls) {
+        this.urls = urls;
     }
 
-    public MyCrawler(String url, String option) {
-        this.url = url;
+    public MyCrawler(String[] urls, String option) {
+        this.urls = urls;
         this.option = option;
     }
 
@@ -49,8 +49,15 @@ public class MyCrawler extends WebCrawler{
     @Override
     public boolean shouldVisit(Page referringPage, WebURL url) {
         String href = url.getURL().toLowerCase();
+
+        boolean b = false;
+
+        for (String url1 : urls) {
+            b = b || href.startsWith(url1);
+        }
+
         return !FILTERS.matcher(href).matches()
-                && href.startsWith(this.url);
+                && b;
 
     }
 
