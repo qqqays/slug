@@ -1,5 +1,6 @@
 package com.qays.controller;
 
+import com.qays.crawler.Crawler4Keywords;
 import com.qays.crawler.Crawler4Links;
 import com.qays.crawler.Crawler4Refine;
 import com.qays.crawler.MyCrawler;
@@ -15,6 +16,7 @@ import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.io.IOException;
 import java.util.List;
 import java.util.Set;
@@ -133,7 +135,19 @@ public class ProController {
 
         System.out.println("~~The keywords \'"+ keyword +"\' of this page are : " + count);
 
+    }
 
+    public void keywordsOfWebsit(String[] urls, String keywords, String seed) {
+
+        List list = exec(Crawler4Keywords.class, urls, keywords, seed);
+
+        Integer count = 0;
+
+        for (Object num : list) {
+            count += (Integer) num;
+        }
+
+        System.out.println("~~The keywords \'"+ keywords +"\' of website: " + count);
     }
 
 }

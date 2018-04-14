@@ -35,5 +35,8 @@ public class SlugApplication {
 
 //        Counts keywords of one page.
         proController.keywordOfPage("http://www.swpv.net", "太阳能");
+
+//        Counts keywords of website
+        proController.keywordsOfWebsit(new String[]{"http://www.swpv.net"}, "太阳能", "http://www.swpv.net");
     }
 }
