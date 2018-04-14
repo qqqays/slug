@@ -7,9 +7,15 @@ import com.qays.entity.PageEntity;
 import com.qays.factory.MyFactory;
 import com.qays.repository.PageRepository;
 import edu.uci.ics.crawler4j.crawler.CrawlController;
+import org.jsoup.Connection;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
@@ -72,6 +78,43 @@ public class ProController {
                 System.out.println("~counter: " + i++ + " link: " + link );
             }
         }
+    }
+
+    public Document getDoc(String url){
+        Connection con = Jsoup.connect(url);
+
+        con.header(
+                "User-Agent",
+                "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36"
+        );
+
+        Document doc = null;
+        try {
+            doc = con.get();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return doc;
+
+    }
+
+    public void linksOfPage(String url){
+
+
+        Elements links = getDoc(url).getElementsByTag("a");
+
+        int i = 0;
+        for (Element link : links) {
+            System.out.println(link.attr("abs:href") + " 链接名：" + link.text() + " numbers: " + i++);
+        }
+
+    }
+
+    public void wordsOfPage(String url) {
+        Elements body = getDoc(url).getElementsByTag("body");
+
+        System.out.println(body.text().length());
     }
 
 }

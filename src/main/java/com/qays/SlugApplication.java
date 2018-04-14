@@ -19,10 +19,18 @@ public class SlugApplication {
 
         ProController proController = ctx.getBean(ProController.class);
 
-//        proController.refine(new String[]{"http://www.pv-ledzm.com/article", "http://www.pv-ledzm.com/category"},
-//                ".newscon",
-//                "http://www.pv-ledzm.com");
+//        Gains news content from web site and later stores some of info into db.
+/*        proController.refine(new String[]{"http://www.pv-ledzm.com/article", "http://www.pv-ledzm.com/category"},
+                ".newscon",
+                "http://www.pv-ledzm.com");*/
 
-        proController.getLinks(new String[]{"http://www.swpv.net"}, "", "http://www.swpv.net");
+//        Gains all links of a website
+//        proController.getLinks(new String[]{"http://www.swpv.net"}, "", "http://www.swpv.net");
+
+//        Gains links of one page
+//        proController.linksOfPage("http://www.swpv.net");
+
+//        Statistics words of one page
+        proController.wordsOfPage("http://www.swpv.net");
     }
 }
