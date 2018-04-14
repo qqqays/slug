@@ -32,5 +32,8 @@ public class SlugApplication {
 
 //        Statistics words of one page
         proController.wordsOfPage("http://www.swpv.net");
+
+//        Counts keywords of one page.
+        proController.keywordOfPage("http://www.swpv.net", "太阳能");
     }
 }

@@ -18,6 +18,8 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.util.List;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by Q-ays.
@@ -112,9 +114,26 @@ public class ProController {
     }
 
     public void wordsOfPage(String url) {
-        Elements body = getDoc(url).getElementsByTag("body");
+        Element body = getDoc(url).body();
 
-        System.out.println(body.text().length());
+        System.out.println("~~The number of words of page: " + body.text().length());
+    }
+
+    public void keywordOfPage(String url, String keyword) {
+        Element body = getDoc(url).body();
+
+        Pattern p = Pattern.compile(keyword);
+
+        Matcher m = p.matcher(body.text());
+
+        int count = 0;
+        while (m.find()) {
+            count++;
+        }
+
+        System.out.println("~~The keywords \'"+ keyword +"\' of this page are : " + count);
+
+
     }
 
 }
