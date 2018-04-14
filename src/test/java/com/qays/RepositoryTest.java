@@ -1,7 +1,6 @@
 package com.qays;
 
-import com.qays.crawler.Controller;
-import com.qays.crawler.ProController;
+import com.qays.controller.ProController;
 import com.qays.entity.PageEntity;
 import com.qays.repository.PageRepository;
 import org.junit.Test;
@@ -9,8 +8,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import javax.persistence.Table;
 
 /**
  * Created by Q-ays.

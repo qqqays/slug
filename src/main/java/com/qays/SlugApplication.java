@@ -1,12 +1,9 @@
 package com.qays;
 
-import com.qays.crawler.ProController;
-import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
+import com.qays.controller.ProController;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Import;
 
 @SpringBootApplication
 public class SlugApplication {
