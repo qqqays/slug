@@ -143,7 +143,7 @@ public class ProController {
 
     }
 
-    public void keywordsOfWebsit(String[] urls, String keywords, String seed) {
+    public void keywordsOfWebsite(String[] urls, String keywords, String seed) {
 
         List list = exec(Crawler4Keywords.class, urls, keywords, seed);
 
