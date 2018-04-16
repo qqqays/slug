@@ -8,6 +8,7 @@ import com.qays.entity.PageEntity;
 import com.qays.factory.MyFactory;
 import com.qays.repository.PageRepository;
 import edu.uci.ics.crawler4j.crawler.CrawlController;
+import edu.uci.ics.crawler4j.crawler.WebCrawler;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -38,7 +39,7 @@ public class ProController {
     @Autowired
     CrawlController controller;
 
-    private final int numberOfCrawlers = 7;
+    private static final int numberOfCrawlers = 7;
 
     public List exec(Class<? extends MyCrawler> clazz, String[] urls, String option, String seed) {
                 /*
@@ -61,29 +62,7 @@ public class ProController {
         return controller.getCrawlersLocalData();
     }
 
-    public void refine(String[] urls, String option, String seed) {
-
-        List list = exec(Crawler4Refine.class, urls, option, seed);
-
-        for (Object set : list) {
-            for (Object page : (Set) set) {
-                pageRepository.save((PageEntity) page);
-            }
-        }
-    }
-
-    public void getLinks(String[] urls, String option, String seed) {
-
-        List list = exec(Crawler4Links.class, urls, option, seed);
-
-        int i = 0;
-        for (Object set : list) {
-            for (Object link : (Set) set) {
-                System.out.println("~counter: " + i++ + " link: " + link );
-            }
-        }
-    }
-
+//    public method to get object of document
     public Document getDoc(String url){
         Connection con = Jsoup.connect(url);
 
@@ -100,9 +79,34 @@ public class ProController {
         }
 
         return doc;
-
     }
 
+//    refine news info of websiete
+    public void refine(String[] urls, String option, String seed) {
+
+        List list = exec(Crawler4Refine.class, urls, option, seed);
+
+        for (Object set : list) {
+            for (Object page : (Set) set) {
+                pageRepository.save((PageEntity) page);
+            }
+        }
+    }
+
+//    Gains links from the whole of website
+    public void getLinks(String[] urls, String option, String seed) {
+
+        List list = exec(Crawler4Links.class, urls, option, seed);
+
+        int i = 0;
+        for (Object set : list) {
+            for (Object link : (Set) set) {
+                System.out.println("~counter: " + i++ + " link: " + link );
+            }
+        }
+    }
+
+//    Gains links of one page
     public void linksOfPage(String url){
 
 
@@ -115,12 +119,14 @@ public class ProController {
 
     }
 
+//    Gains words of one page
     public void wordsOfPage(String url) {
         Element body = getDoc(url).body();
 
         System.out.println("~~The number of words of page: " + body.text().length());
     }
 
+//    Gains words of one page
     public void keywordOfPage(String url, String keyword) {
         Element body = getDoc(url).body();
 

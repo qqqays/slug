@@ -1,5 +1,6 @@
 package com.qays.factory;
 
+import com.qays.crawler.Crawler4Links;
 import com.qays.crawler.MyCrawler;
 import edu.uci.ics.crawler4j.crawler.CrawlController;
 import edu.uci.ics.crawler4j.crawler.WebCrawler;
@@ -11,7 +12,7 @@ import java.lang.reflect.Constructor;
  * whosqays@gmail.com
  * 04-13-2018 9:59
  */
-public class MyFactory<T extends MyCrawler> implements CrawlController.WebCrawlerFactory {
+public class MyFactory<T extends MyCrawler> implements CrawlController.WebCrawlerFactory<T> {
 
     private final Class<T> clazz;
     private String[] urls;
@@ -24,10 +25,11 @@ public class MyFactory<T extends MyCrawler> implements CrawlController.WebCrawle
     }
 
     @Override
-    public WebCrawler newInstance() throws Exception {
+    @SuppressWarnings("unchecked")
+    public T newInstance() throws Exception {
 
-        Constructor con = clazz.getConstructor(String[].class, String.class);
+        Constructor<T> con = clazz.getConstructor(String[].class, String.class);
 
-        return (WebCrawler) con.newInstance(urls,option);
+        return con.newInstance(urls,option);
     }
 }
