@@ -31,12 +31,15 @@ public class SlugApplication {
 //        proController.linksOfPage("http://www.swpv.net");
 
 //        Statistics words of one page
-        proController.wordsOfPage("http://www.swpv.net");
+//        proController.wordsOfPage("http://www.swpv.net");
 
 //        Counts keywords of one page.
-        proController.keywordOfPage("http://www.swpv.net", "太阳能");
+//        proController.keywordOfPage("http://www.swpv.net", "太阳能");
 
 //        Counts keywords of website
-        proController.keywordsOfWebsite(new String[]{"http://www.swpv.net"}, "太阳能", "http://www.swpv.net");
+//        proController.keywordsOfWebsite(new String[]{"http://www.swpv.net"}, "太阳能", "http://www.swpv.net");
+
+//        Counting alt of images of website
+        proController.imgAltOfWebsite(new String[]{"http://www.pv-ledzm.com"}, "太阳能路灯", "http://www.pv-ledzm.com");
     }
 }

@@ -1,9 +1,7 @@
 package com.qays.controller;
 
-import com.qays.crawler.Crawler4Keywords;
-import com.qays.crawler.Crawler4Links;
-import com.qays.crawler.Crawler4Refine;
-import com.qays.crawler.MyCrawler;
+import com.qays.crawler.*;
+import com.qays.entity.ImageEntity;
 import com.qays.entity.PageEntity;
 import com.qays.factory.MyFactory;
 import com.qays.repository.PageRepository;
@@ -18,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import java.awt.*;
 import java.io.IOException;
 import java.util.List;
 import java.util.Set;
@@ -143,6 +142,7 @@ public class ProController {
 
     }
 
+//    Counting keywords for website
     public void keywordsOfWebsite(String[] urls, String keywords, String seed) {
 
         List list = exec(Crawler4Keywords.class, urls, keywords, seed);
@@ -154,6 +154,24 @@ public class ProController {
         }
 
         System.out.println("~~The keywords \'"+ keywords +"\' of website: " + count);
+    }
+
+    public void imgAltOfWebsite(String[] urls, String alt, String seed) {
+        List list = exec(Crawler4ImgAlt.class, urls, alt, seed);
+
+        Integer imgN = 0;
+        Integer altN = 0;
+        Integer matchN = 0;
+
+        for (Object image : list) {
+            imgN += ((ImageEntity) image).getImgNum();
+            altN += ((ImageEntity) image).getAltNum();
+            matchN += ((ImageEntity) image).getMatchAltNum();
+        }
+
+        System.out.println("~~Number of tag of image in website: " + imgN);
+        System.out.println("~~Number of alt of image tag in website: " + altN);
+        System.out.println("~~match the alt \'" + alt + "\' of website: " + matchN);
     }
 
 }

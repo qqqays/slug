@@ -1,5 +1,6 @@
 package com.qays.crawler;
 
+import com.qays.entity.ImageEntity;
 import edu.uci.ics.crawler4j.crawler.Page;
 import edu.uci.ics.crawler4j.parser.HtmlParseData;
 import org.jsoup.Jsoup;
@@ -17,10 +18,11 @@ import java.util.regex.Pattern;
  */
 public class Crawler4ImgAlt extends MyCrawler{
 
-    protected Integer altCounter = 0;
+    protected ImageEntity image;
 
     public Crawler4ImgAlt(String[] urls, String option) {
         super(urls, option);
+        this.image = new ImageEntity();
     }
 
     @Override
@@ -34,22 +36,40 @@ public class Crawler4ImgAlt extends MyCrawler{
 
             Document doc = Jsoup.parse(html);
 
-            Elements elements = doc.select("img[alt]");
+//            Elements elements = doc.select("img[alt]");
+            Elements elements = doc.getElementsByTag("img");
 
             Pattern p = Pattern.compile(option);
 
+            Integer imageNumber = 0;
+            Integer altNumber = 0;
+            Integer matchAltNumber = 0;
+
             for (Element img : elements) {
 
-                Matcher m = p.matcher(img.attr("alt"));
-                while (m.find()) {
-                    altCounter++;
+                imageNumber++;
+
+                String alt = img.attr("alt");
+                if (alt !=null && !alt.equals("")) {
+
+                    altNumber++;
+
+                    Matcher m = p.matcher(alt);
+
+                    while (m.find()) {
+                        matchAltNumber++;
+                    }
                 }
             }
+
+            image.setImgNum(image.getImgNum() + imageNumber);
+            image.setAltNum(image.getAltNum() + altNumber);
+            image.setMatchAltNum(image.getMatchAltNum() + matchAltNumber);
         }
     }
 
     @Override
     public Object getMyLocalData() {
-        return altCounter;
+        return image;
     }
 }
