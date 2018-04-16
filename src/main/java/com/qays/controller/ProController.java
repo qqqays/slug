@@ -6,7 +6,6 @@ import com.qays.entity.PageEntity;
 import com.qays.factory.MyFactory;
 import com.qays.repository.PageRepository;
 import edu.uci.ics.crawler4j.crawler.CrawlController;
-import edu.uci.ics.crawler4j.crawler.WebCrawler;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -15,8 +14,6 @@ import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import java.awt.*;
 import java.io.IOException;
 import java.util.List;
 import java.util.Set;
@@ -156,6 +153,7 @@ public class ProController {
         System.out.println("~~The keywords \'"+ keywords +"\' of website: " + count);
     }
 
+//    Counting the tag of img, alt of img, match alt of img tag
     public void imgAltOfWebsite(String[] urls, String alt, String seed) {
         List list = exec(Crawler4ImgAlt.class, urls, alt, seed);
 
@@ -172,6 +170,18 @@ public class ProController {
         System.out.println("~~Number of tag of image in website: " + imgN);
         System.out.println("~~Number of alt of image tag in website: " + altN);
         System.out.println("~~match the alt \'" + alt + "\' of website: " + matchN);
+    }
+
+    public void flexible(String[] urls, String option, String seed) {
+        List list = exec(CrawlerFlexible.class, urls, option, seed);
+
+        Integer count = 0;
+
+        for (Object src : list) {
+            count += (Integer) src;
+        }
+
+        System.out.println("~~The empty src of img tag: " + count);
     }
 
 }

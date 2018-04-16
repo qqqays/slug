@@ -40,6 +40,9 @@ public class SlugApplication {
 //        proController.keywordsOfWebsite(new String[]{"http://www.swpv.net"}, "太阳能", "http://www.swpv.net");
 
 //        Counting alt of images of website
-        proController.imgAltOfWebsite(new String[]{"http://www.pv-ledzm.com"}, "太阳能路灯", "http://www.pv-ledzm.com");
+//        proController.imgAltOfWebsite(new String[]{"http://www.pv-ledzm.com"}, "太阳能路灯", "http://www.pv-ledzm.com");
+
+//        flexible crawler
+        proController.flexible(new String[]{"http://www.pv-ledzm.com"}, "", "http://www.pv-ledzm.com");
     }
 }
