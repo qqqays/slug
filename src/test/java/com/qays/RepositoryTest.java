@@ -28,7 +28,7 @@ public class RepositoryTest {
 //    Controller controller;
 
     @Autowired
-    CrawlerService proController;
+    CrawlerService crawler;
 
     @Test
     public void repositorySave(){
@@ -50,7 +50,12 @@ public class RepositoryTest {
 
     @Test
     public void refine(){
-        proController.refine(new ConstParam4Crawler(new String[]{"http://www.swpv.net/news"},".detail-body", "http://www.swpv.net/news"));
+        crawler.refine(new ConstParam4Crawler(new String[]{"http://www.swpv.net/news"},".detail-body", "http://www.swpv.net/news"));
+    }
+
+    @Test
+    public void links() {
+        crawler.getLinks(new ConstParam4Crawler(new String[]{"http://www.swpv.net/news"}, ".detail-body", "http://www.swpv.net/news"));
     }
 
 }
