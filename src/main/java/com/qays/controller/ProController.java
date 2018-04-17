@@ -7,10 +7,7 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by Q-ays.
@@ -72,4 +69,31 @@ public class ProController {
         return crawler.linksOfPage(url);
     }
 
+    /**
+     * Statistics words of one page
+     * @param url
+     * @return
+     */
+    @ApiOperation(value = "Counts words of one page")
+    @ApiImplicitParam(name="url", value = "The url of the page you want to statistics", required = true, paramType = "query")
+    @GetMapping("/wordsOfPage")
+    public Integer wordsOfPage(@RequestParam String url){
+        return crawler.wordsOfPage(url);
+    }
+
+    /**
+     * Statistics the number of the keywords appearance of one page
+     * @param url
+     * @param keywords
+     * @return
+     */
+    @ApiOperation(value = "Searches the numbers of the keywords in one page")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "url", value = "The url of the page", required = true, paramType = "query"),
+            @ApiImplicitParam(name = "keywords", value = "keywords", required = true, paramType = "query")
+    })
+    @GetMapping("/keywordsOfPage")
+    public Integer keywordsOfPage(@RequestParam String url, @RequestParam String keywords){
+        return crawler.keywordOfPage(url, keywords);
+    }
 }
