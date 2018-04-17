@@ -24,6 +24,11 @@ public class ProController {
     @Autowired
     CrawlerService crawler;
 
+    /**
+     * refine some information form website
+     * @param cpc
+     * @return
+     */
     @ApiOperation(
             value = "refine the news info from specific website",
             notes = "also used to refine other info which are appointed by tag, class or id"
@@ -39,6 +44,11 @@ public class ProController {
         return crawler.refine(cpc);
     }
 
+    /**
+     * Gets links of whole website
+     * @param cpc
+     * @return
+     */
     @ApiOperation(value = "Gets links of whole website", notes = "ditto")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "urls", value = "array of url group", required = true, paramType = "query"),
@@ -50,6 +60,11 @@ public class ProController {
         return crawler.getLinks(cpc);
     }
 
+    /**
+     * Gets links of one page of website
+     * @param url
+     * @return
+     */
     @ApiOperation(value = "Gets links of whole website", notes = "ditto")
     @ApiImplicitParam(name="url", value = "which page would you like to count", required = true, paramType = "query")
     @GetMapping("/linksOfPage")
