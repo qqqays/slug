@@ -1,8 +1,10 @@
 package com.qays;
 
 import com.qays.controller.ProController;
+import com.qays.entity.ConstParam4Crawler;
 import com.qays.entity.PageEntity;
 import com.qays.repository.PageRepository;
+import com.qays.service.CrawlerService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +28,7 @@ public class RepositoryTest {
 //    Controller controller;
 
     @Autowired
-    ProController proController;
+    CrawlerService proController;
 
     @Test
     public void repositorySave(){
@@ -48,7 +50,7 @@ public class RepositoryTest {
 
     @Test
     public void refine(){
-        proController.refine(new String[]{"http://www.swpv.net/news"},".detail-body", "http://www.swpv.net/news");
+        proController.refine(new ConstParam4Crawler(new String[]{"http://www.swpv.net/news"},".detail-body", "http://www.swpv.net/news"));
     }
 
 }
