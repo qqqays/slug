@@ -55,6 +55,5 @@ public class CrawlerConfiguration {
         }
 
         return controller;
-
     }
 }
