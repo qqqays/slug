@@ -48,8 +48,8 @@ public class ProController {
      */
     @ApiOperation(value = "Gets links of whole website", notes = "ditto")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "urls", value = "array of url group", required = true, paramType = "query"),
             @ApiImplicitParam(name = "option", value = "ignore", paramType = "query"),
+            @ApiImplicitParam(name = "urls", value = "array of url group", required = true, paramType = "query"),
             @ApiImplicitParam(name = "seed", value = "which website", required = true, paramType = "query")
     })
     @GetMapping("/getLinks")
