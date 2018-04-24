@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,6 +24,7 @@ import java.util.regex.Pattern;
  * 04-17-2018 10:05
  */
 @Service
+@Scope("prototype")
 public class CrawlerService {
 
     @Autowired

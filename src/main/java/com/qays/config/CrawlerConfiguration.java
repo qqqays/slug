@@ -8,6 +8,7 @@ import edu.uci.ics.crawler4j.robotstxt.RobotstxtServer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 
 /**
  * Created by Q-ays.
@@ -35,6 +36,7 @@ public class CrawlerConfiguration {
     }
 
     @Bean
+    @Scope("prototype")
     public CrawlController getCrawlController(){
         String crawlStorageFolder = "/data/crawl/root";
 
