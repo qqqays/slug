@@ -45,7 +45,7 @@ public class CrawlerComponent {
 //        controller.startNonBlocking(myfactory, numberOfCrawlers);
         controller.start(myFactory, numberOfCrawlers);
 
-        return controller.getCrawlersLocalData();
+            return controller.getCrawlersLocalData();
 
     }
 

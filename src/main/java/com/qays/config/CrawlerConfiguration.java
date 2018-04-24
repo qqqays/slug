@@ -42,6 +42,7 @@ public class CrawlerConfiguration {
 
         CrawlConfig config = new CrawlConfig();
         config.setCrawlStorageFolder(crawlStorageFolder);
+        config.setResumableCrawling(true);
 
         /*
          * Instantiate the controller for this crawl.
@@ -49,6 +50,7 @@ public class CrawlerConfiguration {
         PageFetcher pageFetcher = new PageFetcher(config);
         RobotstxtConfig robotstxtConfig = new RobotstxtConfig();
         RobotstxtServer robotstxtServer = new RobotstxtServer(robotstxtConfig, pageFetcher);
+
         CrawlController controller = null;
         try {
             controller = new CrawlController(config, pageFetcher, robotstxtServer);
