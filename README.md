@@ -1,2 +1,2 @@
 # slug
-Just a crawler,  but it's may as slow as a slug ; )
+Just a crawler,  but it may be as slow as a slug ; )
